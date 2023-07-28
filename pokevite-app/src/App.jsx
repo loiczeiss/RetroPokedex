@@ -1,7 +1,7 @@
 
 import Header from './components/Header'
 import './App.scss'
-import Pokedex from './components/Pokedex'
+import GptPokedex from './components/GptPokedex'
 import Footer from './components/Footer'
 
 function App() {
@@ -11,8 +11,8 @@ function App() {
     <div className="App  flex  flex-col  h-full bg-black rounded-lg border-2 d ">
     
 <Header/>
-  <Pokedex/>
-   {/* <Footer/> */}
+  <GptPokedex/>
+   <Footer/>
     </div>
   )
 }
