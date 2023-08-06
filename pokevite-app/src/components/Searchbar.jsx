@@ -2,55 +2,55 @@ import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import { GET_GEN_1 } from "../gql/Get_Gen_1";
 import React from "react";
+
 const Searchbar = () => {
   const { loading, error, data } = useQuery(GET_GEN_1);
-  const [searchInput, setsearchInput] = useState("");
-  
-  if (loading) return <p>Loading</p>
-if (error) return <p>Error...</p>
+  const [searchInput, setSearchInput] = useState("");
+  const [filteredPokemons, setFilteredPokemons] = useState([]);
 
-const SearchList = [data.pokemons.results]
-console.log(SearchList[0][1])
+  if (loading) return <p>Loading</p>;
+  if (error) return <p>Error...</p>;
 
-const handleChange = (e) => {
-    e.preventDefault();
-    setsearchInput(e.target.value)
-}; 
-if (searchInput.length > 0){
-    console.log()
-SearchList[0].filter((pokemon) => {
-   return pokemon.name.match(searchInput)
+  const pokemons = data.pokemons.results;
 
-});
-}
-  return <>
-  <input
-    type="search"
-    placeholder="Search here"
-    onChange={handleChange}
-    value={searchInput}/>
-    
-    <table>
-  <tr>
-    <th>Country</th>
-    <th>Continent</th>
+  const handleChange = (e) => {
+    const input = e.target.value;
+    setSearchInput(input);
 
-  </tr>
+    if (input.length > 0) {
+      const filtered = pokemons.filter((pokemon) =>
+        pokemon.name.toLowerCase().includes(input.toLowerCase())
+      );
+      setFilteredPokemons(filtered);
+    } else {
+      setFilteredPokemons([]);
+    }
+  };
 
-{SearchList[0].map((pokemon, index) => {
+  const handleSelect = (pokemonName) => {
+    setSearchInput(pokemonName);
+    setFilteredPokemons([]);
+  };
 
+  return (
+    <div className="flex flex-col place-content-center	 ">
+      <input 
+        type="search"
+        placeholder="Search here"
+        onChange={handleChange}
+        value={searchInput}
+      />
+      <ul className="bg-white	" >
+        {filteredPokemons.map((pokemon, index) => (
+          <li key={index} onClick={() => handleSelect(pokemon.name)}>
+            {pokemon.name}
+          </li>
+        ))}
+      </ul>
 
-
-  <tr>
-    <td>{pokemon.name}</td>
-    <td>{pokemon.continent}</td>
-
-  </tr>
-
-})}
-</table>
-
-</>
+     
+    </div>
+  );
 };
 
 export default Searchbar;
