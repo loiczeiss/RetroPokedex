@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { useLazyQuery, gql } from '@apollo/client';
 
 const style = {
   position: 'absolute',
@@ -16,14 +16,51 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+const SelectedOnInput = gql`
+  query pokemon($Name: String!) {
+    pokemon(name: $Name) {
+      abilities {
+        ability {
+          name
+        }
+      }
+      height
+      sprites {
+        back_shiny
+      }
+      weight
+      order
+      types {
+        type {
+          name
+        }
+      }
+      moves {
+        move {
+          name
+        }
+      }
+    }
+  }
+`;
+
+export default function BasicModal({ open, handleClose, searchInput }) {
+  const [ModalOnInput, { data, loading, error }] = useLazyQuery(SelectedOnInput, {
+    variables: { Name: searchInput },
+  });
+
+  React.useEffect(() => {
+    if (open) {
+      ModalOnInput();
+      console.log(data.pokemon.abilities[0].ability.name)
+    }
+  }, [open, ModalOnInput]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error...</p>;
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -31,9 +68,11 @@ export default function BasicModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
+          {data && (
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              {JSON.stringify(data.pokemon.abilities[0].ability.name, null, 2)} {/* Display the data object */}
+            </Typography>
+          )}
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </Typography>

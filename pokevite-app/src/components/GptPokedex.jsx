@@ -2,14 +2,11 @@ import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import { GET_GEN_1 } from "../gql/Get_Gen_1";
 import * as React from "react";
-import { Modal } from "@mui/material";
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import BasicModal from "../components/Modal"
 
 
 
-const GptPokedex = () => {
+const GptPokedex = ({searchInput}) => {
   
   const { loading, error, data } = useQuery(GET_GEN_1);
   const [open, setOpen] = useState(false);
@@ -61,23 +58,7 @@ const GptPokedex = () => {
           </div>
         ))}
       </div>
-      <div>
-      <Modal
-  open={open}
-  onClose={handleClose}
-  aria-labelledby="modal-modal-title"
-  aria-describedby="modal-modal-description"
->
-  <Box sx={style}>
-    <Typography id="modal-modal-title" variant="h6" component="h2">
-      Text in a modal
-    </Typography>
-    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-      Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-    </Typography>
-  </Box>
-</Modal>
-    </div>
+     <BasicModal open={open} handleClose={handleClose} searchInput={searchInput}/>
       
     </div>
   );
