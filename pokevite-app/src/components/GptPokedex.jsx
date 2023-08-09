@@ -2,29 +2,36 @@ import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import { GET_GEN_1 } from "../gql/Get_Gen_1";
 import * as React from "react";
+import { Modal } from "@mui/material";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+
 
 
 const GptPokedex = () => {
   
   const { loading, error, data } = useQuery(GET_GEN_1);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to track if the modal is open
-  const [selectedPokemon, setSelectedPokemon] = useState(null); // State to track the selected Pokemon
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
 
   if (loading) return <p>Loading</p>;
   if (error) return <p>error...</p>;
 
-  // Function to handle opening the modal
-  // const handleOpenModal = (pokemon) => {
-  //   console.log(pokemon)
-  //   setSelectedPokemon(pokemon);
-  //   // setIsModalOpen(true);
-  // };
 
-  // Function to handle closing the modal
-  const handleCloseModal = () => {
-    setSelectedPokemon(null);
-    setIsModalOpen(false);
-  };
  
   return (
     <div className="h-screen overflow-y-auto">
@@ -37,7 +44,7 @@ const GptPokedex = () => {
                 src={image}
                 alt="pokemons sprites"
                 className="w-32 m-2 border-4 border-black bg-pokemonRed self-center grayscale hover:grayscale-0"
-                onClick={() => handleOpenModal({ id, name, image })}
+                onClick={handleOpen}
               />
 
               <div className="flex justify-center">
@@ -54,13 +61,24 @@ const GptPokedex = () => {
           </div>
         ))}
       </div>
-
-      {/* Render the Modal component if the modal is open */}
-      {isModalOpen && (
-        <Modal onClose={handleCloseModal}>
- 
-        </Modal>
-      )}
+      <div>
+      <Modal
+  open={open}
+  onClose={handleClose}
+  aria-labelledby="modal-modal-title"
+  aria-describedby="modal-modal-description"
+>
+  <Box sx={style}>
+    <Typography id="modal-modal-title" variant="h6" component="h2">
+      Text in a modal
+    </Typography>
+    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+      Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+    </Typography>
+  </Box>
+</Modal>
+    </div>
+      
     </div>
   );
 };
