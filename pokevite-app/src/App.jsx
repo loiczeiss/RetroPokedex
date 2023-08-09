@@ -7,12 +7,13 @@ import { useState } from 'react'
 
 function App() {
 
-const [searchInput, setsearchInput] = useState("")
+const [searchInput, setSearchInput] = useState("")
   return (
     <div className="App  flex  flex-col  h-full bg-black rounded-lg border-2 d ">
     
-<Header searchProp={setsearchInput}/>
-  <GptPokedex/>
+<Header searchInput={searchInput} setSearchInput={setSearchInput}/>
+
+  <GptPokedex searchInput={searchInput}/>
    <Footer/>
     </div>
   )

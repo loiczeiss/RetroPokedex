@@ -5,9 +5,9 @@ import React from "react";
 
 
 
-const Searchbar = () => {
+const Searchbar = ({searchInput, setSearchInput}) => {
   const { loading, error, data } = useQuery(GET_GEN_1);
-  const [searchInput, setSearchInput] = useState("");
+ 
   const [filteredPokemons, setFilteredPokemons] = useState([]);
   const searchbarRef = useRef(null);
   
@@ -44,7 +44,7 @@ const Searchbar = () => {
   };
 
   const handleSelect = (pokemonName) => {
-    setSearchInput(Name);
+    setSearchInput(pokemonName);
     setFilteredPokemons([]);
   };
 
