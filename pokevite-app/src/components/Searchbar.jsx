@@ -48,6 +48,8 @@ const Searchbar = ({searchInput, setSearchInput}) => {
     setFilteredPokemons([]);
   };
 
+
+
   return (
     <div className=" flex flex-col place-content-center">
       <input
@@ -57,10 +59,11 @@ const Searchbar = ({searchInput, setSearchInput}) => {
         placeholder="Search here"
         onChange={handleChange}
         value={searchInput}
+        
       />
       <ul className="bg-white max-h-12 overflow-y-auto fixed top-12 w-52">
         {filteredPokemons.map((pokemon, index) => (
-          <li key={index} onClick={() => handleSelect(pokemon.name)}>
+          <li key={index}  onClick={() => handleSelect(pokemon.name)} >
             {pokemon.name}
           </li>
         ))}

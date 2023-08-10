@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import { GET_GEN_1 } from "../gql/Get_Gen_1";
 import * as React from "react";
-import BasicModal from "../components/Modal"
+// import BasicModal from "../components/Modal"
 
 
 
@@ -31,8 +31,8 @@ const GptPokedex = ({searchInput}) => {
 
  
   return (
-    <div className="h-screen overflow-y-auto">
-      <div className="flex-1 flex flex-wrap mt-20">
+    <div className="h-screen -mb-24 ">
+      <div className="flex-1 flex flex-wrap">
         {data.pokemons.results.map(({ id, name, image }) => (
           <div key={id} className="w-1/3 p-2 h-60 border-2 border-black rounded-lg flex flex-col">
             <div className="bg-pokeGreen rounded-lg h-full flex flex-col">
@@ -50,7 +50,7 @@ const GptPokedex = ({searchInput}) => {
                 </p>
               </div>
               <div className="flex justify-center">
-                <p className="text-xl uppercase font-semibold px-2 justify-self-center hover:bg-black hover:text-white">
+                <p className="text-xl uppercase font-semibold px-2 justify-self-center">
                   {id}
                 </p>
               </div>
@@ -58,7 +58,7 @@ const GptPokedex = ({searchInput}) => {
           </div>
         ))}
       </div>
-     <BasicModal open={open} handleClose={handleClose} searchInput={searchInput}/>
+     {/* <BasicModal open={open} handleClose={handleClose} searchInput={searchInput}/> */}
       
     </div>
   );
