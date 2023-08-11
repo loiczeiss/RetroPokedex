@@ -4,7 +4,12 @@ module.exports = {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  theme: {colors: {
+  theme: {
+    fontFamily: {
+      PKMN: ["PKMN", "sans-serif"],
+     
+    },
+    colors: {
     pokemonRed: '#FF0000',
   black: '#000000',
 white: '#ffff',

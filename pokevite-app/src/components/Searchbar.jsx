@@ -5,9 +5,9 @@ import React from "react";
 
 
 
-const Searchbar = ({searchInput, setSearchInput}) => {
+const Searchbar = ({searchInput, setSearchInput, setActiveIndex}) => {
   const { loading, error, data } = useQuery(GET_GEN_1);
- 
+ const [ modInput, setModInput] = useState("")
   const [filteredPokemons, setFilteredPokemons] = useState([]);
   const searchbarRef = useRef(null);
   
@@ -31,7 +31,7 @@ const Searchbar = ({searchInput, setSearchInput}) => {
 
   const handleChange = (e) => {
     const input = e.target.value;
-    setSearchInput(input);
+    setModInput(input);
 
     if (input.length > 0) {
       const filtered = pokemons.filter((pokemon) =>
@@ -46,9 +46,11 @@ const Searchbar = ({searchInput, setSearchInput}) => {
   const handleSelect = (pokemonName) => {
     setSearchInput(pokemonName);
     setFilteredPokemons([]);
+    setActiveIndex(1)
+    
   };
 
-
+  
 
   return (
     <div className=" flex flex-col place-content-center">
@@ -58,7 +60,7 @@ const Searchbar = ({searchInput, setSearchInput}) => {
         type="search"
         placeholder="Search here"
         onChange={handleChange}
-        value={searchInput}
+        value={modInput}
         
       />
       <ul className="bg-white max-h-12 overflow-y-auto fixed top-12 w-52">

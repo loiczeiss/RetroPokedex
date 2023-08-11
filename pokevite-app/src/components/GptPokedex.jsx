@@ -6,12 +6,14 @@ import * as React from "react";
 
 
 
-const GptPokedex = ({searchInput}) => {
+const GptPokedex = ({setSearchInput, setActiveIndex, searchInput}) => {
   
   const { loading, error, data } = useQuery(GET_GEN_1);
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+ 
   const handleClose = () => setOpen(false);
+
+
 
   const style = {
     position: 'absolute',
@@ -28,6 +30,11 @@ const GptPokedex = ({searchInput}) => {
   if (loading) return <p>Loading</p>;
   if (error) return <p>error...</p>;
 
+  const clg = (pokemonName) => () => {
+    setSearchInput(pokemonName.name);
+    setOpen(true);
+    setActiveIndex(1)
+  };
 
  
   return (
@@ -41,11 +48,11 @@ const GptPokedex = ({searchInput}) => {
                 src={image}
                 alt="pokemons sprites"
                 className="w-32 m-2 border-4 border-black bg-pokemonRed self-center grayscale hover:grayscale-0"
-                onClick={handleOpen}
+                onClick={clg({name})}
               />
 
               <div className="flex justify-center">
-                <p className="text-xl uppercase w-fit font-black p-2 justify-self-center hover:bg-black hover:text-white">
+                <p onClick={clg({name})} className="text-xl uppercase w-fit font-black p-2 justify-self-center hover:bg-black hover:text-white">
                   {name}
                 </p>
               </div>
