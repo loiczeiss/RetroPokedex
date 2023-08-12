@@ -1,32 +1,34 @@
-import { useQuery } from "@apollo/client";
-import { useState } from "react";
-import { GET_GEN_1 } from "../gql/Get_Gen_1";
+import { useQuery, gql } from "@apollo/client";
+import { useState, useEffect } from "react";
+
 import * as React from "react";
 import { AllPokemons } from "../gql/AllPokemons";
 // import BasicModal from "../components/Modal"
 
+const GET_GEN_1 = gql`
+query pokemons($limit: Int, $offset: Int) {
+  pokemons(limit: $limit, offset: $offset) {
+   
+    results {
+      url
+      name
+      id
+      image
+    }
+  }
+}`
 
 
-const GptPokedex = ({setSearchInput, setActiveIndex, searchInput}) => {
+const GptPokedex = ({setSearchInput, setActiveIndex, queryLimit, queryOffset}) => {
   
-  const { loading, error, data } = useQuery(GET_GEN_1);
+  const { loading, error, data } = useQuery(GET_GEN_1, {
+    variables: { limit: queryLimit, offset: queryOffset },
+  });
   const [open, setOpen] = useState(false);
  
-  const handleClose = () => setOpen(false);
 
 
 
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
 
   if (loading) return <p>Loading</p>;
   if (error) return <p>error...</p>;
