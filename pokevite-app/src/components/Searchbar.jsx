@@ -1,4 +1,4 @@
-import { useLazyQuery, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { useState, useEffect, useRef } from "react";
 import { GET_GEN_1 } from "../gql/Get_Gen_1";
 import React from "react";
@@ -47,25 +47,27 @@ const Searchbar = ({searchInput, setSearchInput, setActiveIndex}) => {
     setSearchInput(pokemonName);
     setFilteredPokemons([]);
     setActiveIndex(1)
+    setModInput("")
     
   };
 
-  
 
   return (
-    <div className=" flex flex-col place-content-center">
+    <div className="relative flex flex-col place-content-center">
+     
+
       <input
         ref={searchbarRef}
-        className="w-52"
+        className="custom-input w-52 lg:w-64 bg-black text-pokeGreen border-none placeholder:text-pokeGreen focus:outline-none  font-PKMN focus:border-none border focus:bg-pokeGreen focus:text-black text-sm lg:text-lg	 p-2"
         type="search"
-        placeholder="Search here"
+        placeholder="Enter PKMN name"
         onChange={handleChange}
         value={modInput}
         
       />
-      <ul className="bg-white max-h-12 overflow-y-auto fixed top-12 w-52">
+      <ul className="bg-black max-h-12 overflow-y-auto w-52 md:w-64 md:absolute md:top-14 font-PKMN " >
         {filteredPokemons.map((pokemon, index) => (
-          <li key={index}  onClick={() => handleSelect(pokemon.name)} >
+          <li className="hover:bg-pokeGreen hover:text-black text-pokeGreen pl-2 text-sm md:text-lg" key={index}  onClick={() => handleSelect(pokemon.name)} >
             {pokemon.name}
           </li>
         ))}
