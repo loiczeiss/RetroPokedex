@@ -45,12 +45,12 @@ const GptPokedex = ({setSearchInput, setActiveIndex, queryLimit, queryOffset}) =
       <div className="flex-1 flex flex-wrap mb-8">
         {data.pokemons.results.map(({ id, name, image }) => (
           <div key={id} className="w-full md:w-1/3 p-2 h-60 border-2 border-black flex flex-col">
-            <div className="bg-pokeGreen h-full flex flex-col">
+            <div onClick={handlePress({name})} className="bg-pokeGreen h-full flex flex-col">
               {/* Add onClick handler to the img tag */}
               <img
                 src={image}
                 alt="pokemons sprites"
-                className="w-32 m-2 border-4 border-black bg-pokemonRed self-center grayscale hover:grayscale-0"
+                className="w-32 m-2 border-4 border-black bg-black hover:bg-white self-center grayscale hover:grayscale-0"
                 onClick={handlePress({name})}
               />
 

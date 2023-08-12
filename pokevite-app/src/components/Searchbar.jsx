@@ -58,7 +58,7 @@ const Searchbar = ({searchInput, setSearchInput, setActiveIndex}) => {
 
       <input
         ref={searchbarRef}
-        className="custom-input w-52 lg:w-64 bg-black text-pokeGreen border-none placeholder:text-pokeGreen focus:outline-none  font-PKMN focus:border-none border focus:bg-pokeGreen focus:text-black text-sm lg:text-lg	 p-2"
+        className="hover:bg-pokeGreen hover:placeholder-black w-52 lg:w-64 bg-black text-pokeGreen border-none placeholder:text-pokeGreen focus:outline-none  font-PKMN focus:border-none border focus:bg-pokeGreen focus:text-black text-sm lg:text-lg	 p-2"
         type="search"
         placeholder="Enter PKMN name"
         onChange={handleChange}
