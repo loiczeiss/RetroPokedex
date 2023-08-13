@@ -1,9 +1,7 @@
 import { useQuery, gql } from "@apollo/client";
 import { useState, useEffect } from "react";
-
 import * as React from "react";
-import { AllPokemons } from "../gql/AllPokemons";
-// import BasicModal from "../components/Modal"
+
 
 const GET_GEN_1 = gql`
 query pokemons($limit: Int, $offset: Int) {
@@ -19,7 +17,7 @@ query pokemons($limit: Int, $offset: Int) {
 }`
 
 
-const GptPokedex = ({setSearchInput, setActiveIndex, queryLimit, queryOffset, setIsLoading}) => {
+const Pokedex = ({setSearchInput, setActiveIndex, queryLimit, queryOffset, setIsLoading}) => {
   
   const { loading, error, data } = useQuery(GET_GEN_1, {
     variables: { limit: queryLimit, offset: queryOffset },
@@ -49,7 +47,7 @@ const GptPokedex = ({setSearchInput, setActiveIndex, queryLimit, queryOffset, se
  
   return (
     <div className="h-screen  overflow-auto ">
-      <div className="flex-1 flex flex-wrap mb-8">
+      <div className="flex-1 flex flex-wrap mb-14">
         {data.pokemons.results.map(({ id, name, image }) => (
           <div key={id} className="w-full md:w-1/3 p-2 h-60 border-2 border-black flex flex-col">
             <div onClick={handlePress({name})} className="bg-pokeGreen h-full flex flex-col">
@@ -75,10 +73,9 @@ const GptPokedex = ({setSearchInput, setActiveIndex, queryLimit, queryOffset, se
           </div>
         ))}
       </div>
-     {/* <BasicModal open={open} handleClose={handleClose} searchInput={searchInput}/> */}
-      
+        
     </div>
   );
 };
 
-export default GptPokedex;
+export default Pokedex;

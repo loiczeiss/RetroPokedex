@@ -56,7 +56,7 @@ const PokemonData = ({searchInput, setIsLoading}) => {
 
   return (
     <div className="h-full bg-pokemonRed  overflow-y-auto   ">
-      <div className=" m-1  border-2 border-white mb-8" >
+      <div className=" m-1  border-2 border-white mb-16" >
         {data && data.pokemon && (
           <>
             <div className="w-full flex flex-col md:flex-row justify-between h-1/2 bg-black">

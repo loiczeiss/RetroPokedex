@@ -1,6 +1,6 @@
 import Header from "./components/Header";
 import "./App.scss";
-import GptPokedex from "./components/GptPokedex";
+import Pokedex from "./components/Pokedex";
 import Footer from "./components/Footer";
 import { useState } from "react";
 import PokemonData from "./components/PokemonData";
@@ -19,18 +19,31 @@ function App() {
         setActiveIndex={setActiveIndex}
         activeIndex={activeIndex}
       />
-      
-     { isLoading ? (  <div className="flex flex-col items-center h-screen justify-center">
-        <img src="../trtet.gif" alt="" className="w-48" />
-        <p className="text-white font-PKMN text-4xl">Loading...</p>
-      </div>) : null}
-      {activeIndex === 0 && (
-      <GptPokedex queryLimit={queryLimit} queryOffset={queryOffset} searchInput={searchInput} setSearchInput={setSearchInput} setActiveIndex={setActiveIndex} setIsLoading={setIsLoading} />
-    )}
 
-    {activeIndex === 1 && (
-      <PokemonData activeIndex={activeIndex} searchInput={searchInput} setIsLoading={setIsLoading} />
-    )}
+      {isLoading ? (
+        <div className="flex flex-col items-center h-screen justify-center">
+          <img src="../trtet.gif" alt="" className="w-48" />
+          <p className="text-white font-PKMN text-4xl">Loading...</p>
+        </div>
+      ) : null}
+      {activeIndex === 0 && (
+        <Pokedex
+          queryLimit={queryLimit}
+          queryOffset={queryOffset}
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+          setActiveIndex={setActiveIndex}
+          setIsLoading={setIsLoading}
+        />
+      )}
+
+      {activeIndex === 1 && (
+        <PokemonData
+          activeIndex={activeIndex}
+          searchInput={searchInput}
+          setIsLoading={setIsLoading}
+        />
+      )}
       {activeIndex === 2 && (
         <Filter
           setQueryLimit={setQueryLimit}
