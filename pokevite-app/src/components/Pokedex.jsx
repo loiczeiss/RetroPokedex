@@ -51,7 +51,7 @@ const Pokedex = ({setSearchInput, setActiveIndex, queryLimit, queryOffset, setIs
         {data.pokemons.results.map(({ id, name, image }) => (
           <div key={id} className="w-full md:w-1/3 p-2 h-60 border-2 border-black flex flex-col">
             <div onClick={handlePress({name})} className="bg-pokeGreen h-full flex flex-col">
-              {/* Add onClick handler to the img tag */}
+              
               <img
                 src={image}
                 alt="pokemons sprites"
