@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import { useState } from "react";
 import PokemonData from "./components/PokemonData";
 import Filter from "./components/Filter";
+import gif from './img/trtet.gif'
 function App() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [searchInput, setSearchInput] = useState("");
@@ -22,8 +23,8 @@ function App() {
 
       {isLoading ? (
         <div className="flex flex-col items-center h-screen justify-center">
-          <img src="../trtet.gif" alt="" className="w-48" />
-          <p className="text-white font-PKMN text-4xl">Loading...</p>
+          <img src={gif} alt="" className="w-48" />
+          <p className="text-white font-PKMN text-2xl md:text-4xl">Loading...</p>
         </div>
       ) : null}
       {activeIndex === 0 && (
