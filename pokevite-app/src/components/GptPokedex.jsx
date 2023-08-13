@@ -19,7 +19,7 @@ query pokemons($limit: Int, $offset: Int) {
 }`
 
 
-const GptPokedex = ({setSearchInput, setActiveIndex, queryLimit, queryOffset}) => {
+const GptPokedex = ({setSearchInput, setActiveIndex, queryLimit, queryOffset, setIsLoading}) => {
   
   const { loading, error, data } = useQuery(GET_GEN_1, {
     variables: { limit: queryLimit, offset: queryOffset },
@@ -27,6 +27,13 @@ const GptPokedex = ({setSearchInput, setActiveIndex, queryLimit, queryOffset}) =
   const [open, setOpen] = useState(false);
  
 
+  useEffect(() => {
+    setIsLoading(loading); // Set isLoading while loading is true
+  }, [loading, setIsLoading]);
+
+  if (error) {
+    return <p>Error...</p>;
+  }
 
 
 

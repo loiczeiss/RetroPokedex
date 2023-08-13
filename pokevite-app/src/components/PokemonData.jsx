@@ -30,7 +30,7 @@ const SelectedOnInput = gql`
   }
 `;
 
-const PokemonData = ({searchInput}) => { 
+const PokemonData = ({searchInput, setIsLoading}) => { 
   
   const [WindowOnInput, { data, loading, error }] = useLazyQuery(
     SelectedOnInput,
@@ -43,6 +43,13 @@ const PokemonData = ({searchInput}) => {
     WindowOnInput();
   }, []);
 
+  useEffect(() => {
+    setIsLoading(loading); // Set isLoading while loading is true
+  }, [loading, setIsLoading]);
+
+  if (error) {
+    return <p>Error...</p>;
+  }
   if (loading) return <p>Loading</p>;
   if (error) return <p>error...</p>;
   console.log(data);
