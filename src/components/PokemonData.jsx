@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useLazyQuery, gql } from "@apollo/client";
+import { useMyContext } from "./MyContext";
 
 const SelectedOnInput = gql`
   query pokemon($Name: String!) {
@@ -30,7 +31,9 @@ const SelectedOnInput = gql`
   }
 `;
 
-const PokemonData = ({searchInput, setIsLoading}) => { 
+const PokemonData = () => { 
+
+  const {searchInput, setIsLoading} = useMyContext()
   
   const [WindowOnInput, { data, loading, error }] = useLazyQuery(
     SelectedOnInput,

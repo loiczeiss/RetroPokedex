@@ -1,9 +1,11 @@
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
+import { useMyContext } from "./MyContext";
 
 
 
-const Filter = ({setQueryLimit, setActiveIndex, setQueryOffset}) => {
+const Filter = ({ setActiveIndex}) => {
+  const { setQueryLimit, setQueryOffset} = useMyContext()
   const firstQuery = () => {
     setActiveIndex(0);
     setQueryLimit(151);

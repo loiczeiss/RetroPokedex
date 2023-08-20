@@ -1,6 +1,7 @@
 import { useQuery, gql } from "@apollo/client";
 import { useState, useEffect } from "react";
 import * as React from "react";
+import { useMyContext } from "./MyContext";
 
 
 const GET_GEN_1 = gql`
@@ -17,18 +18,15 @@ query pokemons($limit: Int, $offset: Int) {
 }`
 
 
-const Pokedex = ({setSearchInput, setActiveIndex, queryLimit, queryOffset, setIsLoading}) => {
+const Pokedex = ({ setActiveIndex}) => {
+
+  const { setSearchInput, queryLimit, queryOffset, setIsLoading} = useMyContext()
   
   const { loading, error, data } = useQuery(GET_GEN_1, {
     variables: { limit: queryLimit, offset: queryOffset },
   });
   const [open, setOpen] = useState(false);
  
-
-  useEffect(() => {
-    setIsLoading(loading); // Set isLoading while loading is true
-  }, [loading, setIsLoading]);
-
   if (error) {
     return <p>Error...</p>;
   }

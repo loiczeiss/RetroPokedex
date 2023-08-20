@@ -1,59 +1,45 @@
+import React, { useState } from "react";
 import Header from "./components/Header";
 import "./App.scss";
 import Pokedex from "./components/Pokedex";
 import Footer from "./components/Footer";
-import { useState } from "react";
 import PokemonData from "./components/PokemonData";
 import Filter from "./components/Filter";
-import gif from './img/trtet.gif'
-function App() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [searchInput, setSearchInput] = useState("");
-  const [queryLimit, setQueryLimit] = useState(1010);
-  const [queryOffset, setQueryOffset] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+import gif from "./img/trtet.gif";
+import { MyContextProvider, useMyContext } from "./components/MyContext";
+
+// Define the AppContent component that wraps the content
+function AppContent() {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const {  isLoading } = useMyContext();
+
   return (
     <div className="App flex flex-col h-screen bg-black rounded-lg border-2 overflow-hidden">
-      <Header
-        searchInput={searchInput}
-        setSearchInput={setSearchInput}
-        setActiveIndex={setActiveIndex}
-        activeIndex={activeIndex}
-      />
+      <Header setActiveIndex={setActiveIndex} activeIndex={activeIndex} />
 
       {isLoading ? (
         <div className="flex flex-col items-center h-screen justify-center">
           <img src={gif} alt="" className="w-48" />
-          <p className="text-white font-PKMN text-2xl md:text-4xl">Loading...</p>
+          <p className="text-white font-PKMN text-2xl md:text-4xl">
+            Loading...
+          </p>
         </div>
       ) : null}
-      {activeIndex === 0 && (
-        <Pokedex
-          queryLimit={queryLimit}
-          queryOffset={queryOffset}
-          searchInput={searchInput}
-          setSearchInput={setSearchInput}
-          setActiveIndex={setActiveIndex}
-          setIsLoading={setIsLoading}
-        />
-      )}
+      {activeIndex === 0 && <Pokedex setActiveIndex={setActiveIndex} />}
 
-      {activeIndex === 1 && (
-        <PokemonData
-          activeIndex={activeIndex}
-          searchInput={searchInput}
-          setIsLoading={setIsLoading}
-        />
-      )}
-      {activeIndex === 2 && (
-        <Filter
-          setQueryLimit={setQueryLimit}
-          setQueryOffset={setQueryOffset}
-          setActiveIndex={setActiveIndex}
-        />
-      )}
+      {activeIndex === 1 && <PokemonData activeIndex={activeIndex} />}
+      {activeIndex === 2 && <Filter setActiveIndex={setActiveIndex} />}
       <Footer />
     </div>
+  );
+}
+
+// Wrap the AppContent component with the context provider
+function App() {
+  return (
+    <MyContextProvider>
+      <AppContent />
+    </MyContextProvider>
   );
 }
 

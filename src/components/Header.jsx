@@ -1,12 +1,13 @@
 import { useState } from "react";
 import Searchbar from "./Searchbar";
+import { useMyContext } from "./MyContext";
 
 const Header = ({
-  searchInput,
-  setSearchInput,
+ 
   setActiveIndex,
   activeIndex,
 }) => {
+  const { searchInput, setSearchInput} = useMyContext()
 
 
     const GenClicked = () => {
