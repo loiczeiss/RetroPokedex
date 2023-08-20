@@ -4,8 +4,8 @@ import { useMyContext } from "./MyContext";
 
 
 
-const Filter = ({ setActiveIndex}) => {
-  const { setQueryLimit, setQueryOffset} = useMyContext()
+const Filter = () => {
+  const { setQueryLimit, setQueryOffset, setActiveIndex} = useMyContext()
   const firstQuery = () => {
     setActiveIndex(0);
     setQueryLimit(151);

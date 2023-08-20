@@ -3,7 +3,7 @@ import { createContext, useContext, useState, useRef, useEffect } from 'react';
 const MyContext = createContext();
 
 export const MyContextProvider = ({ children }) => {
-
+  const [activeIndex, setActiveIndex] = useState(0)
   const [searchInput, setSearchInput] = useState("");
   const [queryLimit, setQueryLimit] = useState(1010);
   const [queryOffset, setQueryOffset] = useState(0);
@@ -27,7 +27,7 @@ export const MyContextProvider = ({ children }) => {
     setIsLoading,
 
     setOpen,
-    filteredPokemons, setFilteredPokemons, searchbarRef, modInput, setModInput
+    filteredPokemons, setFilteredPokemons, searchbarRef, modInput, setModInput, activeIndex, setActiveIndex
   };
 
 

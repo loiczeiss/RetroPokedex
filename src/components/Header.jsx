@@ -4,10 +4,9 @@ import { useMyContext } from "./MyContext";
 
 const Header = ({
  
-  setActiveIndex,
-  activeIndex,
+
 }) => {
-  const { searchInput, setSearchInput} = useMyContext()
+  const { searchInput, setSearchInput, setActiveIndex, activeIndex} = useMyContext()
 
 
     const GenClicked = () => {

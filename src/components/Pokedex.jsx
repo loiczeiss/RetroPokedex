@@ -18,9 +18,9 @@ query pokemons($limit: Int, $offset: Int) {
 }`
 
 
-const Pokedex = ({ setActiveIndex}) => {
+const Pokedex = () => {
 
-  const { setSearchInput, queryLimit, queryOffset, setIsLoading} = useMyContext()
+  const { setSearchInput, queryLimit, queryOffset,  setActiveIndex} = useMyContext()
   
   const { loading, error, data } = useQuery(GET_GEN_1, {
     variables: { limit: queryLimit, offset: queryOffset },
