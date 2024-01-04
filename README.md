@@ -21,6 +21,7 @@ It is styled as an early games real pokedex.
   ![retroPokem](https://github.com/loiczeiss/RetroPokedex/assets/104260545/d70f7494-6f10-4455-b470-b4e5655abf15)
 
 ## Links
+- Live Site: (https://loiczeiss.github.io/RetroPokedex/)
 - Solution URL: (https://github.com/loiczeiss/RetroPokedex)
 
 ## Author
