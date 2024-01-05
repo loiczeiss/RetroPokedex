@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLazyQuery, gql } from "@apollo/client";
 import { useMyContext } from "./MyContext";
 
@@ -97,11 +97,11 @@ const PokemonData = () => {
                 </h2>
               </div>
             </section>
-            <section className="bg-black border-pokemonRed border-t-2">
-              <h2 className="text-white font-PKMN font-bold text-2xl mt-6 text-center">ABILITIES</h2>
-             <ul className=" p-0 mt-6">
+            <section className="bg-black border-pokemonRed border-t-2 h-full">
+              <h2 className="text-white font-PKMN font-bold text-2xl md:text-3xl lg:text-5xl mt-8 text-center">ABILITIES</h2>
+             <ul className=" p-0 mt-8">
              {data.pokemon.abilities.map((ability) => (
-                    <li className="mr-2 font-PKMN text-2xl md:text-3xl text-white text-center"
+                    <li className="mr-2 font-PKMN text-1xl md:text-2xl lg:text-4xl text-white text-center"
                     key={ability.ability.name}>
                       {ability.ability.name.toUpperCase()}
 
@@ -110,12 +110,12 @@ const PokemonData = () => {
 
                     ))}
              </ul>
-             <h2 className="text-white font-PKMN font-bold text-2xl mt-6 text-center">
+             <h2 className="text-white font-PKMN font-bold text-2xl md:text-3xl lg:text-5xl mt-8  text-center">
                 MOVES
                </h2>
-               <ul className=" p-0 mt-6 ">
+               <ul className=" p-0 mt-8 pb-6" >
              {data.pokemon.moves.map((move) => (
-                    <li className="mr-2 font-PKMN text-1xl md:text-3xl text-white text-center"
+                    <li className="mr-2 font-PKMN text-1xl md:text-2xl lg:text-4xl text-white text-center "
                     key={move.move.name}>
                       {move.move.name.toUpperCase()}
 
