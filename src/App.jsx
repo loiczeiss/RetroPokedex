@@ -10,12 +10,12 @@ import { MyContextProvider, useMyContext } from "./components/MyContext";
 
 // Define the AppContent component that wraps the content
 function AppContent() {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const {  isLoading } = useMyContext();
+  const { isLoading, activeIndex } = useMyContext();
+  
 
   return (
     <div className="App flex flex-col h-screen bg-black rounded-lg border-2 overflow-hidden">
-      <Header setActiveIndex={setActiveIndex} activeIndex={activeIndex} />
+      <Header />
 
       {isLoading ? (
         <div className="flex flex-col items-center h-screen justify-center">
@@ -25,10 +25,11 @@ function AppContent() {
           </p>
         </div>
       ) : null}
-      {activeIndex === 0 && <Pokedex setActiveIndex={setActiveIndex} />}
+        {activeIndex === 0 && <Pokedex />}
 
-      {activeIndex === 1 && <PokemonData activeIndex={activeIndex} />}
-      {activeIndex === 2 && <Filter setActiveIndex={setActiveIndex} />}
+        {activeIndex === 1 && <PokemonData />}
+
+      {activeIndex === 2 && <Filter />}
       <Footer />
     </div>
   );

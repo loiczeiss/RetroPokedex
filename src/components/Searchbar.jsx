@@ -5,7 +5,7 @@ import React from "react";
 
 
 
-const Searchbar = ({searchInput, setSearchInput, setActiveIndex}) => {
+const Searchbar = ({ setSearchInput, setActiveIndex}) => {
   const { loading, error, data } = useQuery(GET_GEN_1);
  const [ modInput, setModInput] = useState("")
   const [filteredPokemons, setFilteredPokemons] = useState([]);
@@ -53,7 +53,7 @@ const Searchbar = ({searchInput, setSearchInput, setActiveIndex}) => {
 
 
   return (
-    <div className="relative flex flex-col place-content-center">
+    <section className="relative flex flex-col place-content-center">
      
 
       <input
@@ -72,7 +72,7 @@ const Searchbar = ({searchInput, setSearchInput, setActiveIndex}) => {
           </li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 };
 
